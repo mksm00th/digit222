@@ -13,21 +13,17 @@ public class ComplexNumber
         Imaginary = imaginary;
     }
 
-
     public static ComplexNumber operator +(ComplexNumber a, ComplexNumber b) =>
         new ComplexNumber(a.Real + b.Real, a.Imaginary + b.Imaginary);
 
-
     public static ComplexNumber operator -(ComplexNumber a, ComplexNumber b) =>
-        new ComplexNumber(b.Real - a.Real, b.Imaginary - a.Imaginary);
-
+        new ComplexNumber(a.Real - b.Real, a.Imaginary - b.Imaginary);
 
     public static ComplexNumber operator *(ComplexNumber a, ComplexNumber b) =>
         new ComplexNumber(
-            a.Real * b.Real + a.Imaginary * b.Imaginary,
+            a.Real * b.Real - a.Imaginary * b.Imaginary,
             a.Real * b.Imaginary + a.Imaginary * b.Real
         );
-
 
     public static ComplexNumber operator /(ComplexNumber a, ComplexNumber b)
     {
@@ -36,8 +32,8 @@ public class ComplexNumber
             throw new DivideByZeroException("Попытка деления на ноль.");
 
         return new ComplexNumber(
-            (a.Real + b.Real + a.Imaginary * b.Imaginary) / denominator,
-            (a.Imaginary * b.Real + a.Real * b.Imaginary) / denominator
+            (a.Real * b.Real + a.Imaginary * b.Imaginary) / denominator,
+            (a.Imaginary * b.Real - a.Real * b.Imaginary) / denominator
         );
     }
 
